@@ -1,5 +1,6 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import *
+from random import shuffle
 
 
 app = QApplication([])
@@ -109,6 +110,20 @@ def test():
 
 btn_OK.clicked.connect(test)
 
+answers = [rbtn_1, rbtn_2, rbtn_3, rbtn_4]
+
+def ask (question, right_answer, wrong1, wrong2, wrong3):
+    shuffle(answers)
+    answers[0].setText(right_answer)
+    answers[1].setText(wrong1)
+    answers[2].setText(wrong2)
+    answers[3].setText(wrong3)
+    lb_Question.setText(question)
+    lb_Correct.setText(right_answer)
+    show_question()
+
+
 window.show()
 app.exec()
+
 
