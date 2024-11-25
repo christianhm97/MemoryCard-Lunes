@@ -114,7 +114,7 @@ def test():
         check_answer()
         show_result()
     else:
-        show_question()
+        next_question()
 
 btn_OK.clicked.connect(test)
 
@@ -141,7 +141,30 @@ def check_answer():
     else:
         show_correct('Incorrecto')
 
+
+def next_question():
+    window.cur_question = window.cur_question + 1
+    if window.cur_question >= len(question_list):
+        window.cur_question = 0
+    q = question_list[window.cur_question]
+    ask(q)
+
+
+question_list = []
 q1 = Question('¿Cuál es la capital de España?', 'Madrid', 'Sevilla', 'Toledo', 'Valencia')
-ask(q1)
+question_list.append(q1)
+q2 = Question('¿Qué idioma se habla en Argentina?', 'Español', 'Argentino', 'Inglés', 'Portugués')
+question_list.append(q2)
+q3 = Question('¿Cuánto es nueve mil noventa y nueve más uno?', '9100', '9999', '10000', '9909')
+question_list.append(q3)
+q4 = Question('¿Cuál es mamífero?', 'Murciélago', 'Atún', 'Serpiente', 'Caracol')
+question_list.append(q4)
+q5 = Question('¿Qué planeta es el más cercano al Sol?', 'Mercurio', 'Marte', 'Tierra', 'SagitarioA*')
+question_list.append(q5)
+
+
+
+window.cur_question = -1
+next_question()
 window.show()
 app.exec()
