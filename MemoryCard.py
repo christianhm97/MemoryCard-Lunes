@@ -104,6 +104,7 @@ def show_question():
 
 def test():
     if btn_OK.text() == "Responder":
+        check_answer()
         show_result()
     else:
         show_question()
@@ -123,7 +124,16 @@ def ask (question, right_answer, wrong1, wrong2, wrong3):
     show_question()
 
 
+def show_correct(res):
+    lb_Result.setText(res)
+
+
+def check_answer():
+    if answers[0].isChecked():
+        show_correct('Correcto')
+    else:
+        show_correct('Incorrecto')
+
+ask('¿Cuál es la capital de España?', 'Madrid', 'Sevilla', 'Toledo', 'Valencia')
 window.show()
 app.exec()
-
-
