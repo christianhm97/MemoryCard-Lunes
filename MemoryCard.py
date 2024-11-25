@@ -2,6 +2,13 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import *
 from random import shuffle
 
+class Question():
+    def __init__(self, question, right_answer, wrong1, wrong2, wrong3):
+        self.question = question
+        self.right_answer = right_answer
+        self.wrong1 = wrong1
+        self.wrong2 = wrong2
+        self.wrong3 = wrong3
 
 app = QApplication([])
 
@@ -113,14 +120,14 @@ btn_OK.clicked.connect(test)
 
 answers = [rbtn_1, rbtn_2, rbtn_3, rbtn_4]
 
-def ask (question, right_answer, wrong1, wrong2, wrong3):
+def ask (q: Question):
     shuffle(answers)
-    answers[0].setText(right_answer)
-    answers[1].setText(wrong1)
-    answers[2].setText(wrong2)
-    answers[3].setText(wrong3)
-    lb_Question.setText(question)
-    lb_Correct.setText(right_answer)
+    answers[0].setText(q.right_answer)
+    answers[1].setText(q.wrong1)
+    answers[2].setText(q.wrong2)
+    answers[3].setText(q.wrong3)
+    lb_Question.setText(q.question)
+    lb_Correct.setText(q.right_answer)
     show_question()
 
 
@@ -134,6 +141,7 @@ def check_answer():
     else:
         show_correct('Incorrecto')
 
-ask('¿Cuál es la capital de España?', 'Madrid', 'Sevilla', 'Toledo', 'Valencia')
+q1 = Question('¿Cuál es la capital de España?', 'Madrid', 'Sevilla', 'Toledo', 'Valencia')
+ask(q1)
 window.show()
 app.exec()
