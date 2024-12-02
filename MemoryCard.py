@@ -1,6 +1,6 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import *
-from random import shuffle
+from random import shuffle, randint
 
 class Question():
     def __init__(self, question, right_answer, wrong1, wrong2, wrong3):
@@ -143,10 +143,8 @@ def check_answer():
 
 
 def next_question():
-    window.cur_question = window.cur_question + 1
-    if window.cur_question >= len(question_list):
-        window.cur_question = 0
-    q = question_list[window.cur_question]
+    cur_question = randint(0, len(question_list)-1)
+    q = question_list[cur_question]
     ask(q)
 
 
@@ -163,8 +161,6 @@ q5 = Question('¿Qué planeta es el más cercano al Sol?', 'Mercurio', 'Marte', 
 question_list.append(q5)
 
 
-
-window.cur_question = -1
 next_question()
 window.show()
 app.exec()
