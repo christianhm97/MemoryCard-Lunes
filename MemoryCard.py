@@ -138,11 +138,17 @@ def show_correct(res):
 def check_answer():
     if answers[0].isChecked():
         show_correct('Correcto')
+        window.aciertos += 1
     else:
         show_correct('Incorrecto')
+    print('Preguntas totales:', window.total)
+    print('Preguntas acertadas:', window.aciertos)
+    print('Promedio:', window.aciertos/window.total*100, '%')
+
 
 
 def next_question():
+    window.total += 1
     cur_question = randint(0, len(question_list)-1)
     q = question_list[cur_question]
     ask(q)
@@ -160,7 +166,8 @@ question_list.append(q4)
 q5 = Question('¿Qué planeta es el más cercano al Sol?', 'Mercurio', 'Marte', 'Tierra', 'SagitarioA*')
 question_list.append(q5)
 
-
+window.total = 0
+window.aciertos = 0
 next_question()
 window.show()
 app.exec()
